@@ -1,0 +1,128 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Form3-Demo-Payments",
+		"_postman_id": "d03f12c0-cca5-fd0d-6870-12ff85536ed5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all",
+			"request": {
+				"url": "http://localhost:8080/api/payments/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Page",
+			"request": {
+				"url": {
+					"raw": "http://localhost:8080/api/payments?page=3&size=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"payments"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "3",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "size",
+							"value": "2",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"organisationId\": \"new\",\r\n\"attributes\" : {\r\n\t\"amount\" : \"3223.21\", \r\n\"currency\" : \"GBP\",\r\n\"processingDate\" : \"2017-10-22\", \r\n\"paymentId\" : \"12322\", \r\n\"paymentPurpose\" : \"Theatre ticket\",\r\n\"paymentType\" : \"Credit card\", \r\n\"beneficiaryParty\" : {\r\n\t\"accountName\" : \"Demo\", \r\n\"accountNumber\" : \"155sd832454\",\r\n\"address\" : \"Moscow, Zelenograd 1432-254\",\r\n\"bankId\" : \"SBERBANK\", \r\n\"bankIdCode\" : \"12876\",\r\n\"name\" : \"Eduard Grinchenko\"\r\n}\r\n}\r\n}"
+				},
+				"description": "http://localhost:8080/api/payments?page=3&size=2"
+			},
+			"response": []
+		},
+		{
+			"name": "Save New Payment resource",
+			"request": {
+				"url": "http://localhost:8080/api/payments/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"organisationId\": \"new\",\r\n\"attributes\" : {\r\n\t\"amount\" : \"3223.21\", \r\n    \"currency\" : \"GBP\",\r\n\t\"processingDate\" : \"2017-10-22\", \r\n\t\"paymentId\" : \"12322\", \r\n\t\"paymentPurpose\" : \"Theatre ticket\",\r\n\t\"paymentType\" : \"Credit card\", \r\n\t\"beneficiaryParty\" : {\r\n\t\t\"accountName\" : \"Demo\", \r\n\t\t\"accountNumber\" : \"155sd832454\",\r\n\t\t\"address\" : \"Moscow, Zelenograd 1432-254\",\r\n\t\t\"bankId\" : \"SBERBANK\", \r\n\t\t\"bankIdCode\" : \"12876\",\r\n\t\t\"name\" : \"Eduard Grinchenko\"\r\n\t}\r\n}\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update existing Payment resource",
+			"request": {
+				"url": "http://localhost:8080/api/payments/59eb53ad83d44e4414d0f036",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"organisationId\": \"another\",\r\n\"attributes\" : {\r\n\t\"amount\" : \"234\", \r\n    \"currency\" : \"USD\",\r\n\t\"processingDate\" : \"2017-10-23\", \r\n\t\"paymentId\" : \"12322\", \r\n\t\"paymentPurpose\" : \"Theatre ticket\",\r\n\t\"paymentType\" : \"Credit card\", \r\n\t\"beneficiaryParty\" : {\r\n\t\t\"accountName\" : \"Demo\", \r\n\t\t\"accountNumber\" : \"155sd832454\",\r\n\t\t\"address\" : \"Moscow, Zelenograd 1432-254\",\r\n\t\t\"bankId\" : \"SBERBANK\", \r\n\t\t\"bankIdCode\" : \"12876\",\r\n\t\t\"name\" : \"Eduard Grinchenko\"\r\n\t}\r\n}\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete payment resource",
+			"request": {
+				"url": "http://localhost:8080/api/payments/59eb53ad83d44e4414d0f036",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"organisationId\": \"new\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
