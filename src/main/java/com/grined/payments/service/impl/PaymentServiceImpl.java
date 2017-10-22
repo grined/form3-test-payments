@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -29,11 +30,30 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Page<Payment> findPage(int page, int size) {
+    public Stream<Payment> findByOrganisationId(String organisationId) {
+        if (StringUtils.isEmpty(organisationId)) {
+            throw new NotFoundException("Can not find payments for empty or null organisation id");
+        }
+        return paymentRepository.streamByOrganisationIdAndDeletedFalse(organisationId);
+    }
+
+    @Override
+    public Page<Payment> findAllPaged(int page, int size) {
         if (page < 0 || size < 1) {
             throw new ConflictException("Page value should be non negative. Page size should be positive.");
         }
         return paymentRepository.findByDeletedFalse(new PageRequest(page, size));
+    }
+
+    @Override
+    public Page<Payment> findByOrganisationIdPaged(String organisationId, Integer page, Integer size) {
+        if (StringUtils.isEmpty(organisationId)) {
+            throw new NotFoundException("Can not find payments for empty or null organisation id");
+        }
+        if (page < 0 || size < 1) {
+            throw new ConflictException("Page value should be non negative. Page size should be positive.");
+        }
+        return paymentRepository.findByOrganisationIdAndDeletedFalse(organisationId, new PageRequest(page, size));
     }
 
     @Override

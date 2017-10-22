@@ -4,7 +4,8 @@ import com.grined.payments.entity.db.Payment;
 import com.grined.payments.entity.dto.PaymentDTO;
 
 public final class DTOConverter {
-    private DTOConverter(){}
+    private DTOConverter() {
+    }
 
     public static PaymentDTO paymentToDTO(Payment payment) {
         if (payment == null) {

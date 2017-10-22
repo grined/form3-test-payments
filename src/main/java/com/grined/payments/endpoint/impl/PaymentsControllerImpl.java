@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
-public class PaymentsControllerImpl implements PaymentsController{
+public class PaymentsControllerImpl implements PaymentsController {
     private final PaymentService paymentService;
 
     @Autowired
@@ -36,7 +36,26 @@ public class PaymentsControllerImpl implements PaymentsController{
         } else if (page == null || size == null) { // one of parameter is unspecified
             throw new ConflictException("To paginate your request both page and size parameters should be specified");
         } else {
-            paymentStream = paymentService.findPage(page, size).getContent().stream();
+            paymentStream = paymentService.findAllPaged(page, size).getContent().stream();
+        }
+        return paymentStream
+                .filter(Objects::nonNull)
+                .map(DTOConverter::paymentToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PaymentDTO> listByOrganization(@PathVariable String organisationId, Integer page, Integer size) {
+        if (StringUtils.isEmpty(organisationId)) {
+            throw new NotFoundException("Can not find payments for empty or null organisation id");
+        }
+        Stream<Payment> paymentStream;
+        if (page == null && size == null) {
+            paymentStream = paymentService.findByOrganisationId(organisationId);
+        } else if (page == null || size == null) { // one of parameter is unspecified
+            throw new ConflictException("To paginate your request both page and size parameters should be specified");
+        } else {
+            paymentStream = paymentService.findByOrganisationIdPaged(organisationId, page, size).getContent().stream();
         }
         return paymentStream
                 .filter(Objects::nonNull)

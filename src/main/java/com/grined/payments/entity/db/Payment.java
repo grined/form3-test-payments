@@ -7,7 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Document
-@Getter @Setter
+@Getter
+@Setter
 public class Payment extends BasicDocument {
     private String organisationId;
     private Attributes attributes;

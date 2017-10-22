@@ -9,9 +9,18 @@ import java.util.stream.Stream;
 
 public interface PaymentService {
     Stream<Payment> findAll();
-    Page<Payment> findPage(int page, int size);
+
+    Stream<Payment> findByOrganisationId(String organisationId);
+
+    Page<Payment> findAllPaged(int page, int size);
+
+    Page<Payment> findByOrganisationIdPaged(String organisationId, Integer page, Integer size);
+
     Optional<Payment> findPaymentById(String id);
+
     Payment addPayment(EditPaymentDTO editPaymentDTO);
+
     Payment updatePayment(String id, EditPaymentDTO editPaymentDTO);
+
     void deletePayment(String id);
 }

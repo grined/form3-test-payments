@@ -7,7 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 
-@Getter @Setter
+@Getter
+@Setter
 public class Attributes {
     private Double amount;
     private String currency;
